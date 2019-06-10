@@ -1,0 +1,36 @@
+<form method="POST" ><center>
+	<br><br>
+	<h1>Random voting</h1><br>
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+		<% if flash[:errors] %>
+		<% flash[:errors].each {|error|%>
+		<p><i><%= error %></i></p>
+		<% } %>
+		<%end%>
+		<table cellspacing="25">
+	<tr><td><div id="spacing">State</div></td><td><input type="text" list="names" name="set[state]"></td></tr>
+	<datalist id="names">
+		<%@states.each{|state|%>
+		<option value="<%=state.name%>">
+			<%}%></datalist>
+	<tr><td><div id="spacing">Constituency</div></td><td><input type="text" list="names1" name="set[constituency]" ></td></tr><datalist id="names1">
+		<%@constituencies.each{|constituency|%>
+		<option value="<%=constituency.name%>">
+			<%}%></datalist>
+	<tr><td><div id="spacing">Min limit</div></td><td><input type="number"  name="set[min]" value=0 ></td></tr>
+	<tr><td><div id="spacing">Max limit</div></td><td><input type="number"  name="set[max]" value=1000></td></tr>
+	</div></table><br>
+	<button formaction="option">Options Page</button>
+	<button formaction="generate">Randomize Votes</button></center></form>
+	<%= render 'table_css'%> 
+<style>
+	#limit
+	{
+		display:none;
+	}
+</style>
+<script>
+	function myfunction(){
+	 var x=document.getElementById("limit");
+	 x.style.display="block";
+	 }	</script>

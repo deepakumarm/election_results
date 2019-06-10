@@ -1,0 +1,219 @@
+<body>
+<form method="POST" action="vote/verify">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+	<center>
+		<br>
+<h1>Election Results</h1><br>
+<p>
+<div id="marquee_table"><marquee behaviour="slide" scrollamount="3"  onmouseover="this.stop();"
+           onmouseout="this.start();">
+	<table class="test">
+		<tr>
+			<td>
+<span><p>The <%=@wparty_name%> party has won this election. Their candidates have won in <%=@wparty_constituencies%> constituencies</p></span></td>
+<%@winning_candidates.each{|winning_candidate|%>
+<td>
+<span><p> Candidate <%=winning_candidate.name.capitalize%> is on lead in the <%=Constituency.find(winning_candidate.constituency_id).name %> constituency. </p></span></td>
+	<%}%>
+</tr>
+</table>
+</marquee></div>
+<br>
+<h3>Categorywise results!</h3>
+	<button type="button" onclick="myFunction(0)">State</button>
+	<button type="button" onclick="myFunction(1)">Constituency</button>
+	<button type="button" onclick="myFunction(2)">Party</button>
+	<button type="button" onclick="myFunction(3)">Full information</button>
+	<hr>
+	<br>
+	<div id="menu">
+	<div id="state" class="state">
+		<br>
+		<table>
+			<thead>
+				<tr>
+				<td>State Name</td>
+				<td>Won by</td>
+			</tr>
+			</thead>
+			<%@state.each{|s|%>
+			<tr>
+				<td><%=s.name%></td>
+				<td><%=Party.find(s.party_id).name%></td>
+			</tr>
+			<%}%>
+			</table>
+	</div> 	
+	<div id="constituency" class="constituency">
+		<br>
+		<table>
+			<thead>
+				<tr>
+				<td rowspan="2">Constituency Name</td>
+				<td colspan="2">Won by</td>
+			</tr>
+			<tr>
+				<td>Candidate Name
+				</td>
+				<td>Party
+				</td></tr>
+			</thead>
+			<%@cons.each{|c|%>
+			<tr>
+				<td><%=c.name%></td>
+				<td><%=Candidate.find(c.candidates_id).name%></td>
+				<td><%=Party.find(Candidate.find(c.candidates_id).party_id).name%></td>
+			</tr>
+			<%}%>
+			</table>
+	</div> 	
+	<div id="party" class="party">
+		<br>
+		<table>
+			<thead>
+				<tr>
+				<td >Party</td>
+				<td >No. of Constituencies</td>
+			</tr>
+			</thead>
+			<%@party.each{|p|%>
+			<tr>
+				<td><%=p.name%></td>
+				<td><%=p.no_of_constituencies%></td>
+			</tr>
+			<%}%>
+			</table>
+	</div>
+<div id="fulldetails" class="fulldetails">	
+<br> 	
+<table>
+	<thead>
+		<td>State</td>
+		<td>Constituency</td>
+		<td>Candidate Name</td>
+		<td>Party</td>
+		<td>No. of votes</td>
+	</thead>
+	
+	<% @candidate.each{|candidate| %>
+	<tr>
+	<td><%=candidate.constituency.state.name %></td>
+	<td><%=candidate.constituency.name %></td>
+	<td><%=candidate.name %></td>
+	<td><%=candidate.party.name %></td>
+	<td><%=candidate.no_of_votes%></td>
+	<% } %>
+</tr>
+</table><br></div></div>
+<button>Admin Corner</button>
+</center>
+</form>
+</body>
+<style>
+	table
+	{
+		border-collapse: collapse;
+	}
+	tr td
+	{
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding:20px;
+		color : black;
+
+	}
+	thead td
+	{
+		color:black;
+		font-weight: bold;
+		background-color: #7fb3d5;
+	}
+	form{
+		margin-top: 20px;
+		margin-left:10%;
+		width:80%;
+		background-color: white;
+		padding-bottom: 50px;
+	}
+	body
+	{
+		background-color: #7fb3d5;
+	}
+	h1
+	{
+		color: #065b95 ;
+	}
+	button
+	{
+		margin-top:30px;
+		border: 1px #21618c;
+		background-color: #21618c;
+		padding:10px;
+		color:white;
+		margin-left: 10px;
+		font-family: serif;
+		font-weight: bold;
+	}
+	button:hover
+	{
+		padding:15px;
+		font-style: italic;
+
+	}
+	.state
+	{
+		display: none;
+	}
+	.constituency
+	{
+		display: none;
+	}
+	.party
+	{
+		display: none;
+	}
+	.fulldetails
+	{
+		display: none;
+	}
+	hr
+	{
+		width:46%;
+		margin:10px;
+	}
+	#marquee_table
+	{
+		width:65%;
+	}
+	h3
+	{
+		font-style: italic;
+		text-align: center;
+	}
+	table.test td {
+    background-color:#7fb3d5 ;
+    margin: 12px 12px 12px 12px;
+    width:400px;
+    color: black;
+    font-weight: bold;
+    font-style: italic;
+
+}
+table.test {
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+table.test td:hover{
+	height:100px;
+	font-size:17px;
+}
+
+	</style>
+	<script>
+		function myFunction(j) {
+    var x=document.getElementById("menu").children;
+    for(var i=0;i<x.length;i++)
+    	x[i].style.display="none";
+    x[j].style.display = 'block';
+	}
+	</script>

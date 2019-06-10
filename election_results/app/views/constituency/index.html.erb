@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body><center>
+<form><% content_for(:title,"Home Page..") %>
+<br><br><center><h1>Constituency Page</h1><br>
+<i><h2>There are <%= pluralize(@constituency.count, "constituency")%> in the country</h2></i><br>
+<table>
+	<thead><div id="black">
+		<tr><i><b>
+			<td> Name</td>
+			<td colspan="3">Options</td>
+		</b></i></tr>
+	</div></thead>
+	<tbody>
+		<% @constituency.each{|s|%>
+		<tr>
+			<td><%=s.name%></td>
+			<td><%= link_to "Show",constituencies_path(s.id)%></td>
+			<td><%= link_to "Edit",constituency_edit_path(s.id) %></td>
+			<td><%= link_to "Delete",constituencies_path(s.id),data:{method: :delete, confirm: "Are you sure?"}%></td>
+		</td>
+		</tr>
+		<%}%>
+	</tbody>
+	</table><br><br><%= link_to 'Add New constituency', constituency_new_path%></center>
+<%= render 'templates/index_form_css' %></form></center>
+</body>
+</html>
+<style type="text/css">
+	form
+	{
+		margin-left: 5%;
+	}
+</style>

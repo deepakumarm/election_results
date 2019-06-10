@@ -1,0 +1,30 @@
+<form method="POST" ><br><br>
+	<center><body><h1>Vote here</h1>
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+		<% if flash[:errors] %>
+		<% flash[:errors].each {|error|%>
+		<p><i><%= error %></i></p>
+		<% } %>
+		<%end%>
+		<table cellspacing="25">
+	<tr><td><div id="spacing">State</div></td><td><input type="text" list="names" name="state[name]">
+	<datalist id="names">
+		<%@states.each{|state|%>
+		<option value="<%=state.name%>">
+			<%}%></datalist><br></td></tr>
+	<tr><td><div id="spacing">Constituency </div></td><td><input type="text" list="names1" name="constituency[name]">
+	<datalist id="names1">
+		<%@constituencies.each{|constituency|%>
+		<option value="<%=constituency.name%>">
+			<%}%></datalist><br></td></tr>
+		<tr><td><div id="spacing">Candidate Name</div></td><td><input type="text" list="names2" name="candidate[name]">
+	<datalist id="names2">
+		<%@candidates.each{|candidate|%>
+		<option value="<%=candidate.name%>">
+			<%}%></datalist><br></td></tr>
+  </table><br>
+  	<button formaction="option">Options Page</button>
+    <button formaction="update">Vote this candidate</button><button formaction="set">Random voting</button>	
+  </body></center>
+</form> 
+<%= render 'table_css'%>

@@ -1,0 +1,32 @@
+
+<html><% content_for(:title,"Home Page..") %>
+<body>
+	<center><form>
+<center><h1>States Page</h1><br>
+<i><h2>There are <%= pluralize(@state.count, "state")%> in the country</h2></i><br>
+<table>
+	<thead><div id="black">
+		<tr><i><b>
+			<td> Name</td>
+			<td colspan="3">Options</td>
+		</b></i></tr>
+	</div></thead>
+	<tbody>
+		<% @state.each{|s|%>
+		<tr>
+			<td><%=s.name%></td>
+			<td><%= link_to "Show",states_path(s.id)%></td>
+			<td><%= link_to "Edit",state_edit_path(s.id) %></td>
+			<td><%= link_to "Delete",states_path(s.id),data:{method: :delete, confirm: "Are you sure?"}%></td>
+		</td>
+		</tr>
+		<%}%>
+	</div></tbody>
+</table><br><br><div id="button"><%= link_to 'Add New State', state_new_path%></div></center></form></center></body></html>
+<%= render 'templates/index_form_css' %>
+<style>
+	form
+	{
+		margin-left:5%;
+	}
+	</style>

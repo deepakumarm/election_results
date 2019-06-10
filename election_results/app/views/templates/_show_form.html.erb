@@ -1,0 +1,24 @@
+
+<center><h1><%=tname.capitalize%> details</h1>
+<br><form>
+	<b>Name : </b><%=name%><br><br>
+<%= link_to "Back page", admin_options_path%></form></center>
+<style>
+	a{
+		text-decoration: none;
+	}
+	a:hover
+	{
+		font-weight : bold;
+		font-style: italic;
+		color: blue;
+	}
+	form
+	{
+		border:1px solid black;
+		background-color: lightgrey;
+		margin:10px;
+		width:30%;
+		padding: 20px;
+	}
+</style>

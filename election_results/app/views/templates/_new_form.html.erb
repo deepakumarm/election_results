@@ -1,0 +1,41 @@
+<% content_for(:title,"Adding #{name.pluralize}..") %>
+<center><h1>Add New <%=name.capitalize%></h1><br>
+	<form action="<%=action%>" method="POST" >
+		<i><h3>Enter <%=name%> details here</h3></i>
+		<% if flash[:errors] %>
+		<% flash[:errors].each {|error|%>
+		<p><i><%= error %></i></p>
+		<% } %>
+		<%end%>
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+		First Name <input type="text" name="<%=array_name%>"><br>
+		<button><i>Add <%=name%></i></button>
+	</form></center>
+	<style>
+		input
+		{
+			margin-top: 20px;
+			width:20%;
+			margin-left:10px;
+			padding:5px;
+		}
+		button
+		{
+			margin-top: 30px;
+			background-color: black;
+			color:white;
+			padding: 5px;
+			margin-bottom: 20px;
+		}
+		form{
+			border:1px solid grey;
+			background-color: lightgrey;
+			margin-left:25%;
+			margin-right:25%;
+			margin-top: 5%;
+			align-content: center;
+		}
+		p{
+			color: red;
+		}
+	</style>

@@ -1,0 +1,69 @@
+<% content_for(:title,"Home Page..") %>
+<br><br><center><h1>Home Page</h1><br>
+<i><h2>There are <%= pluralize(object.count, name)%> in the country</h2></i><br>
+<table>
+	<thead><div id="black">
+		<tr><i><b>
+			<td> Name</td>
+			<td colspan="3">Options</td>
+		</b></i></tr>
+	</div></thead>
+	<tbody>
+		<%path1=name + 's_path';path2=name+'_edit_path';path3=name+'_new_path'%>
+		<% object.each{|s|%>
+		<tr>
+			<td><%=s.name%></td>
+			<td><%= link_to "Show","#{path1}"(s.id)%></td>
+			<td><%= link_to "Edit","#{path2}"(s.id) %></td>
+			<td><%= link_to "Delete","#{path1}"(s.id),data:{method: :delete, confirm: "Are you sure?"}%></td>
+		</td>
+		</tr>
+		<%}%>
+
+	</tbody>
+</table><br><br><%= link_to 'Add New '+name ,path3%></center>
+<style>
+	thead td{
+		border: 1px solid black;
+		text-align:center;
+		padding:20px 100px 20px 100px;
+		color: white;
+		background-color: #646161;
+		font-family: "Times New Roman", Times, serif;
+		font-weight: bolder;
+		font-size:20px;
+	}
+	tbody td
+	{
+		border: 1px solid black;
+		text-align:center;
+		padding:10px;
+		background-color: lightgrey;
+
+	}
+	table
+	{
+		border-collapse: collapse;;
+	}
+	thead
+	{
+		font-family: sans-serif;
+	}
+	a
+	{
+		text-decoration: none;
+		color: black;
+		font-weight: bold;
+	}
+	a:hover
+	{
+		font-weight : bold;
+		font-style: italic;
+		color: blue;
+	}
+	#colour
+	{
+		border:1px solid black;
+		border-collapse: collapse;
+	}
+	</style>

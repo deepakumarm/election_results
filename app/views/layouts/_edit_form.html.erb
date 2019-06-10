@@ -1,0 +1,55 @@
+<% content_for(:title,"Edit #{object.name} Info")%>
+<center><h2>Edit Page </h2>
+<form action="<%= action %>" method="POST" >
+	    <input type="hidden" name="_method" value="patch">
+	    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+		<% if flash[:errors] %>
+		<% flash[:errors].each {|error|%>
+		<p><i><%= error %></i></p>
+		<% } %>
+		<%end%>
+		<i><h3>Edit <%= name%>.capitalize details here</h3></i>
+		State Name <input type="text" name="<%=name%>[name]" value="<%=object.name%>"><br>
+		<button><i>Edit <%= name.capitalize%></i></button>
+	</form><br><br>
+<%= link_to "Back to home page", root_path%>
+</center>
+	<style>
+		input
+		{
+			margin-top: 20px;
+			width:20%;
+			margin-left:10px;
+			padding:5px;
+		}
+		button
+		{
+			margin-top: 30px;
+			background-color: black;
+			color:white;
+			padding: 5px;
+			margin-bottom: 20px;
+			margin-left:10px;
+			margin-right: 10px;
+		}
+		form{
+			border:1px solid grey;
+			background-color: lightgrey;
+			margin-left:25%;
+			margin-right:25%;
+			margin-top: 5%;
+			align-content: center;
+		}
+		p{
+			color: red;
+		}
+		a{
+		text-decoration: none;
+	}
+	a:hover
+	{
+		font-weight : bold;
+		font-style: italic;
+		color: blue;
+	}
+	</style>

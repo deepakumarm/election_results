@@ -1,0 +1,25 @@
+<html>
+<body><% content_for(:title,"Home Page..") %><form>
+<br><br><center><h1>Party Page</h1><br>
+	
+<i><h2>There are <%= pluralize(@party.count, "party")%> in the country</h2></i><br>
+<table>
+	<thead><div id="black">
+		<tr><i><b>
+			<td> Name</td>
+			<td colspan="3">Options</td>
+		</b></i></tr>
+	</div></thead>
+	<tbody>
+		<% @party.each{|s|%>
+		<tr>
+			<td><%=s.name%></td>
+			<td><%= link_to "Show",parties_path(s.id)%></td>
+			<td><%= link_to "Edit",party_edit_path(s.id) %></td>
+			<td><%= link_to "Delete",parties_path(s.id),data:{method: :delete, confirm: "Are you sure?"}%></td>
+		</td>
+		</tr>
+		<%}%>
+	</tbody>
+	</table><br><br><%= link_to 'Add New Party', party_new_path%></form></center></body></html>
+<%= render 'templates/index_form_css' %>

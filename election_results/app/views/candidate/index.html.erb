@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<center><form><center><% content_for(:title,"Home Page..") %>
+<br><br><center><h1>Candidate Page</h1><br>
+<i><h2>There are <%= pluralize(@candidate.count, "candidate")%> in the country</h2></i><br>
+<table>
+	<thead><div id="black">
+		<tr><i><b>
+			<td> Name</td>
+			<td colspan="3">Options</td>
+		</b></i></tr>
+	</div></thead>
+	<tbody>
+		<% @candidate.each{|s|%>
+		<tr>
+			<td><%=s.name%></td>
+			<td><%= link_to "Show",candidates_path(s.id)%></td>
+			<td><%= link_to "Edit",candidate_edit_path(s.id) %></td>
+			<td><%= link_to "Delete",candidates_path(s.id),data:{method: :delete, confirm: "Are you sure?"}%></td>
+		</td>
+		</tr>
+		<%}%>
+	</tbody>
+	</table><br><br><%= link_to 'Add New Candidate', candidate_new_path%></center>
+<%= render 'templates/index_form_css' %></center></form></center>
+</body>
+</html>
+<style type="text/css">
+	form{
+		margin-left: 5%;
+	}
+</style>

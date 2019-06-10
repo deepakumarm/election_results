@@ -1,0 +1,94 @@
+<body>
+	<form method="POST"><center><br><br>
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+<h1>Random Votes</h1><br>
+<% if @state
+	s1="<b>State</b>"%>
+	<%=content_tag(:p, content_tag(:b,'State: ')+@state)%>
+<%end
+	if @constituency%>
+		<%=content_tag(:p, content_tag(:b,'Constituency: ')+@constituency)%>
+	<%end
+	%>
+	<p><b>Minimum range: </b><%=@min%></p>
+	<p><b>Maximum range: </b><%=@max%></p><br>
+		<table>
+			<thead>
+				<td>Candidate </td>
+				<td>Constituency</td>
+				<td>Party</td>
+				<td>No. of Votes</td>
+				</thead>
+				
+				<%i=0;@candidates.each{|candidate|%>
+					<input type="hidden" name="candidate[value][<%=i%>]" value="<%=candidate.id%>">
+					<%i=i+1
+				}%>
+				<%i=0%>
+				<%@candidates.each{|c|%>
+				<tr><td><%=c.name%></td>
+					<td><%=Constituency.find(c.constituency_id).name%></td>
+					<td><%=Party.find(c.party_id).name%></td>
+					<td><input type="number" name="array[number][<%=i%>]" value="<%=@r.rand(@max)%>"></td></tr>
+					<%i=i+1%>
+	<%}%>
+</table><button formaction="option">Options Page</button>
+<button formaction="finalize">Set Votes </button>
+	<button formaction="set">Back </button>	
+</center></form>
+<style>
+	table
+	{
+		border-collapse: collapse;
+	}
+	tr td
+	{
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding:20px;
+		color : black;
+
+	}
+	thead td
+	{
+		color:black;
+		font-weight: bold;
+		background-color: #7fb3d5;
+	}
+	button
+	{
+		margin-top:30px;
+		border: 1px #21618c;
+		background-color: #21618c;
+		padding:10px;
+		color:white;
+		margin-left: 10px;
+		font-family: serif;
+		font-weight: bold;
+	}
+	button:hover
+	{
+		padding:15px;
+		font-style: italic;
+
+	}
+	p{
+color: red;
+	}
+	form{
+		margin-top: 20px;
+		margin-left:15%;
+		width:70%;
+		background-color: white;
+		padding-bottom: 50px;
+	}
+	body
+	{
+		background-color: #7fb3d5;
+
+	}
+	input
+	{
+		width:100px;
+	}
+	</style>
