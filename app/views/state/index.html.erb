@@ -18,10 +18,9 @@
 			<td><%= link_to "Show",states_path(s.id)%></td>
 			<td><%= link_to "Edit",state_edit_path(s.id) %></td>
 			<td><%= link_to "Delete",states_path(s.id),data:{method: :delete, confirm: "Are you sure?"}%></td>
-		</td>
 		</tr>
 		<%}%>
-	</div></tbody>
+      </tbody></div>
 </table><br><br><div id="button"><%= link_to 'Add New State', state_new_path%></div></center></form></center></body></html>
 <%= render 'templates/index_form_css' %>
 <style>

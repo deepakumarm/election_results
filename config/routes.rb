@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "shortlinks/" => "short_links#index"
+  get 's/:short_url', to: 'short_links#redirect_to_original_url', as: 'redirect_to_original_url'
 	get "state/index" => "state#index", as: "state_home"
 	get "state" => "state#index"
 	get "state/new" => "state#new"
