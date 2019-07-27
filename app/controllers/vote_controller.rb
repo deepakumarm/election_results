@@ -1,5 +1,4 @@
 class VoteController < ApplicationController
-	after_action :print_count, only: :verify
 	def home
 		@candidate=Candidate.all
 		@cons=Constituency.all
@@ -48,12 +47,6 @@ class VoteController < ApplicationController
 			State.second.update(:party_id => Party.second)
 		end
 		}
-	end
-	def print_count
-		ShortLink.increment_counter(value,params[:short_ur])
-		@value = @value + 1
-		puts "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
-		puts @value
 	end
 	def addvote
 		@states=State.all
